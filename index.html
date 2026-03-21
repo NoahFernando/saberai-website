@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SABER AI — Godlike Automation for Elite Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:   #ffffff;
+      --off-white: #f4f4f4;
+      --light-gray: #e0e0e0;
+      --mid-gray: #888888;
+      --dark-gray: #333333;
+      --black:   #000000;
+      --blue:    #1d4ed8;
+      --blue-mid: #2563eb;
+      --blue-light: #3b82f6;
+      --blue-pale: #dbeafe;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--off-white); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); }
+
+    /* ── TYPOGRAPHY ── */
+    h1, h2, h3, h4, h5 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--black);
+      border-bottom: 2px solid var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 96px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 72px;
+      height: 72px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .nav-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: scale(1.55);
+    }
+
+    .nav-logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .nav-logo-text span {
+      color: var(--blue-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--light-gray);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--blue-light); }
+
+    /* ── COLORFUL BUTTON (translated from ButtonColorful component) ── */
+    .btn-colorful {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 28px;
+      height: 44px;
+      background: #18181b;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: transform 0.2s;
+    }
+
+    /* Gradient blur layer — opacity 40% → 80% on hover */
+    .btn-colorful::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, #000000, #1d4ed8, #2563eb, #3b82f6, #dbeafe);
+      opacity: 0.4;
+      filter: blur(10px);
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+
+    .btn-colorful:hover::before { opacity: 0.8; }
+
+    .btn-colorful .btn-label,
+    .btn-colorful .btn-arrow {
+      position: relative;
+      z-index: 1;
+      color: #ffffff;
+    }
+
+    .btn-colorful .btn-arrow {
+      flex-shrink: 0;
+      opacity: 0.9;
+      display: flex;
+    }
+
+    /* Size variants */
+    .btn-colorful.btn-lg  { height: 56px; padding: 0 44px; font-size: 0.9rem; }
+    .btn-colorful.btn-sm  { height: 38px; padding: 0 20px; font-size: 0.78rem; }
+    .btn-colorful.btn-xl  { height: 60px; padding: 0 52px; font-size: 0.9rem; }
+
+    /* Full-width block variant (pricing cards, form submit) */
+    .btn-colorful.btn-block {
+      display: flex;
+      width: 100%;
+      height: 52px;
+    }
+
+    /* Nav variant (slightly smaller, fits navbar) */
+    .nav-cta {
+      /* inherits .btn-colorful — nothing extra needed */
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--blue);
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      margin-bottom: 36px;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      color: var(--black);
+      max-width: 1100px;
+      margin-bottom: 28px;
+    }
+
+    .hero-title .accent {
+      color: var(--blue-light);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--dark-gray);
+      max-width: 640px;
+      margin-bottom: 52px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* btn-primary / btn-secondary now use .btn-colorful */
+
+    .hero-stats {
+      margin-top: 80px;
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--light-gray);
+      padding-top: 48px;
+      width: 100%;
+      max-width: 800px;
+      justify-content: space-around;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.03em;
+    }
+
+    .stat-num span { color: var(--blue-light); }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      padding: 100px 60px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-left: 3px solid var(--blue);
+      padding-left: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      color: var(--black);
+      max-width: 700px;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--mid-gray);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 60px;
+    }
+
+    /* ── LOGOS BAR ── */
+    #logos {
+      background: var(--off-white);
+      padding: 40px 60px;
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .logos-label {
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+
+    .logos-row {
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo-item {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--dark-gray);
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    /* ── PROBLEM SECTION ── */
+    #problem {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    #problem .section-title { color: var(--white); }
+    #problem .section-sub { color: var(--mid-gray); }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid #222;
+    }
+
+    .problem-item {
+      padding: 48px 40px;
+      border-right: 1px solid #222;
+      border-bottom: 1px solid #222;
+    }
+
+    .problem-item:nth-child(3n) { border-right: none; }
+    .problem-item:nth-child(n+4) { border-bottom: none; }
+
+    .problem-icon {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    .problem-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .problem-item p {
+      font-size: 0.9rem;
+      color: var(--mid-gray);
+      line-height: 1.7;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border: 2px solid var(--black);
+    }
+
+    .service-card {
+      padding: 52px 48px;
+      border-right: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+      position: relative;
+      transition: background 0.25s;
+    }
+
+    .service-card:nth-child(2n) { border-right: none; }
+    .service-card:nth-child(n+5) { border-bottom: none; }
+
+    .service-card:hover {
+      background: var(--black);
+    }
+
+    .service-card:hover .svc-title,
+    .service-card:hover .svc-desc,
+    .service-card:hover .svc-num {
+      color: var(--white);
+    }
+
+    .service-card:hover .svc-tag {
+      color: var(--blue-light);
+    }
+
+    .svc-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--mid-gray);
+      margin-bottom: 16px;
+      transition: color 0.25s;
+    }
+
+    .svc-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+      transition: color 0.25s;
+    }
+
+    .svc-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 14px;
+      line-height: 1.2;
+      transition: color 0.25s;
+    }
+
+    .svc-desc {
+      font-size: 0.9rem;
+      color: var(--dark-gray);
+      line-height: 1.75;
+      transition: color 0.25s;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #howitworks {
+      background: var(--off-white);
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--light-gray);
+      margin-top: 20px;
+    }
+
+    .step {
+      padding: 48px 36px;
+      border-right: 1px solid var(--light-gray);
+      position: relative;
+    }
+
+    .step:last-child { border-right: none; }
+
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 20px;
+      letter-spacing: -0.04em;
+    }
+
+    .step h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--mid-gray);
+      line-height: 1.7;
+    }
+
+    /* ── RESULTS ── */
+    #results {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    #results .section-title { color: var(--white); }
+    #results .section-sub { color: var(--mid-gray); }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid #222;
+    }
+
+    .result-card {
+      padding: 48px 36px;
+      border-right: 1px solid #222;
+      border-bottom: 1px solid #222;
+    }
+
+    .result-card:nth-child(4n) { border-right: none; }
+    .result-card:nth-child(n+5) { border-bottom: none; }
+
+    .result-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--blue-light);
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .result-card h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .result-card p {
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+      line-height: 1.6;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--white); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 2px solid var(--black);
+    }
+
+    .testi-card {
+      padding: 48px 40px;
+      border-right: 2px solid var(--black);
+    }
+
+    .testi-card:last-child { border-right: none; }
+
+    .testi-quote {
+      font-size: 2rem;
+      color: var(--blue);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .testi-text {
+      font-size: 0.95rem;
+      color: var(--dark-gray);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-top: 1px solid var(--light-gray);
+      padding-top: 20px;
+    }
+
+    .testi-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .testi-role {
+      font-size: 0.78rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── PRICING ── */
+    #pricing {
+      background: var(--off-white);
+      border-top: 1px solid var(--light-gray);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 2px solid var(--black);
+      margin-top: 20px;
+    }
+
+    .pricing-card {
+      padding: 52px 44px;
+      border-right: 2px solid var(--black);
+      position: relative;
+      background: var(--white);
+    }
+
+    .pricing-card:last-child { border-right: none; }
+
+    .pricing-card.featured {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .pricing-card.featured .price-label,
+    .pricing-card.featured .price-desc,
+    .pricing-card.featured .feat-item {
+      color: var(--mid-gray);
+    }
+
+    .pricing-card.featured .price-num {
+      color: var(--white);
+    }
+
+    .pricing-card.featured .plan-name {
+      color: var(--white);
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+    }
+
+    .plan-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 4px;
+    }
+
+    .price-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--black);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .price-num sub {
+      font-size: 1rem;
+      font-weight: 400;
+      vertical-align: baseline;
+    }
+
+    .price-desc {
+      font-size: 0.8rem;
+      color: var(--mid-gray);
+      margin-bottom: 32px;
+    }
+
+    .feat-list {
+      list-style: none;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feat-item {
+      font-size: 0.88rem;
+      color: var(--dark-gray);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .feat-item::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .pricing-card.featured .feat-item::before { color: var(--blue-light); }
+
+    /* btn-plan now uses .btn-colorful.btn-block */
+
+    /* ── FAQ ── */
+    #faq { background: var(--white); }
+
+    .faq-list {
+      max-width: 860px;
+      border: 2px solid var(--black);
+    }
+
+    .faq-item {
+      border-bottom: 2px solid var(--black);
+    }
+
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      padding: 28px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .faq-q span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .faq-icon {
+      font-size: 1.4rem;
+      color: var(--blue);
+      font-weight: 300;
+      flex-shrink: 0;
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 36px 28px;
+      font-size: 0.9rem;
+      color: var(--mid-gray);
+      line-height: 1.8;
+      border-top: 1px solid var(--light-gray);
+      padding-top: 20px;
+    }
+
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ── CTA BANNER ── */
+    #cta-banner {
+      background: var(--blue);
+      padding: 100px 60px;
+      text-align: center;
+    }
+
+    #cta-banner h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    #cta-banner p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 540px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    /* btn-white now uses .btn-colorful.btn-xl */
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 60px;
+      border-top: 2px solid var(--blue);
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand img {
+      height: 36px;
+      width: 36px;
+      object-fit: contain;
+    }
+
+    .footer-brand span { color: var(--blue-light); }
+
+    .footer-about {
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+      line-height: 1.8;
+    }
+
+    .footer-col h5 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #222;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      font-size: 0.85rem;
+      color: var(--mid-gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--blue-light); }
+
+    .footer-bottom {
+      border-top: 1px solid #222;
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--mid-gray);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-legal a {
+      font-size: 0.78rem;
+      color: var(--mid-gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-legal a:hover { color: var(--blue-light); }
+
+    /* ── DIVIDER LINE ── */
+    .rule {
+      height: 1px;
+      background: var(--light-gray);
+      width: 100%;
+      margin: 0;
+    }
+
+    .rule-dark {
+      height: 1px;
+      background: #222;
+      width: 100%;
+    }
+
+    /* ── CONTACT FORM ── */
+    #contact { background: var(--off-white); border-top: 1px solid var(--light-gray); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      font-size: 2.4rem;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .contact-left p {
+      font-size: 0.95rem;
+      color: var(--mid-gray);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item span {
+      font-size: 0.88rem;
+      color: var(--dark-gray);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dark-gray);
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      background: var(--white);
+      border: 2px solid var(--light-gray);
+      color: var(--black);
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: var(--blue);
+    }
+
+    .form-field textarea { resize: vertical; min-height: 120px; }
+
+    /* form-submit now uses .btn-colorful.btn-block */
+
+    /* ── MEDIA QUERIES ── */
+    @media (max-width: 1024px) {
+      nav { padding: 0 30px; }
+      .nav-links { gap: 24px; }
+      section { padding: 80px 30px; }
+      #hero { padding: 120px 30px 80px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { border-right: none !important; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .step:nth-child(2) { border-right: none; }
+      .step:nth-child(3) { border-bottom: none; }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .result-card:nth-child(2n) { border-right: none; }
+      .result-card:nth-child(n+3) { border-bottom: none; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card { border-right: none !important; border-bottom: 2px solid var(--black); }
+      .pricing-card:last-child { border-bottom: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .testi-card { border-right: none; border-bottom: 2px solid var(--black); }
+      .testi-card:last-child { border-bottom: none; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .problem-item { border-right: none !important; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero-stats { flex-direction: column; gap: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .step { border-right: none; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <img src="saberai-logo.png" alt="SABER AI Logo" />
+      </div>
+      <span class="nav-logo-text">SABER<span>AI</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="btn-colorful btn-sm nav-cta"><span class="btn-label">Get Started</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-eyebrow">AI Automation — Enterprise Grade</div>
+    <h1 class="hero-title">
+      Your Business.<br>
+      <span class="accent">Automated.</span><br>
+      Perfected.
+    </h1>
+    <p class="hero-sub">
+      SABER AI doesn't patch your problems — it obliterates them. We replace entire departments, eliminate human error, and execute at machine precision. This is not software. This is dominance.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#contact" class="btn-colorful btn-lg"><span class="btn-label">Deploy SABER AI</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+      <a href="#services" class="btn-colorful btn-lg"><span class="btn-label">Explore Capabilities</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">98<span>%</span></div>
+        <div class="stat-label">Error Reduction</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10<span>x</span></div>
+        <div class="stat-label">Operational Speed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">£2.4<span>M</span></div>
+        <div class="stat-label">Avg. Annual Savings</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">72<span>h</span></div>
+        <div class="stat-label">Full Deployment</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS BAR -->
+  <div id="logos">
+    <div class="logos-label">Trusted by industry leaders worldwide</div>
+    <div class="logos-row">
+      <div class="logo-item">Meridian Corp</div>
+      <div class="logo-item">Vantage Group</div>
+      <div class="logo-item">Halcyon Ltd</div>
+      <div class="logo-item">Orion Systems</div>
+      <div class="logo-item">Axiom Capital</div>
+      <div class="logo-item">Stratos Global</div>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="section-tag">The Problem</div>
+    <h2 class="section-title">Your business is bleeding money — every single day.</h2>
+    <p class="section-sub">Manual processes, slow teams, and human error aren't just inefficiencies — they're silent killers of growth. We fix all of it.</p>
+    <div class="problem-grid">
+      <div class="problem-item">
+        <div class="problem-icon">⚠</div>
+        <h4>Human Error</h4>
+        <p>Every manual task carries risk. Mistakes in data entry, reporting, and communication cost businesses an average of £878,000 per year.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">⏱</div>
+        <h4>Wasted Time</h4>
+        <p>Your team spends 60% of their day on repetitive, low-value tasks that add no competitive advantage. That stops now.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">📉</div>
+        <h4>Slow Decisions</h4>
+        <p>By the time data reaches decision-makers, it's outdated. Real-time AI intelligence means your business moves at the speed of now.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">💸</div>
+        <h4>Bloated Headcount</h4>
+        <p>Entire departments exist to do what AI does in milliseconds. We automate the function — not the people you actually need.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">🔀</div>
+        <h4>Disconnected Systems</h4>
+        <p>Siloed tools that don't talk to each other create chaos. SABER AI unifies your tech stack into a single intelligent organism.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">🏆</div>
+        <h4>Falling Behind</h4>
+        <p>Your competitors are already automating. Every week you wait is a week they extend their lead. The window is closing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-tag">Our Services</div>
+    <h2 class="section-title">Automation that replaces the ordinary — and amplifies the exceptional.</h2>
+    <p class="section-sub">SABER AI delivers AI solutions engineered at an elite level. Not templates. Not plug-ins. Purpose-built automation that becomes your unfair advantage.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="svc-num">01</div>
+        <div class="svc-tag">Intelligence Core</div>
+        <h3 class="svc-title">Business Process Automation</h3>
+        <p class="svc-desc">Map, optimise, and fully automate your end-to-end business processes. From finance workflows to HR onboarding — SABER AI takes over and never makes mistakes.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">02</div>
+        <div class="svc-tag">Revenue Engine</div>
+        <h3 class="svc-title">AI Sales & Lead Generation</h3>
+        <p class="svc-desc">Autonomous lead qualification, outreach personalisation, and pipeline management. Your sales machine never sleeps, never misses a follow-up, never forgets a lead.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">03</div>
+        <div class="svc-tag">Customer Operations</div>
+        <h3 class="svc-title">Intelligent Customer Service</h3>
+        <p class="svc-desc">Deploy AI agents that resolve 90% of enquiries without human involvement — instantly, at scale, across every channel, 24 hours a day.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">04</div>
+        <div class="svc-tag">Data Command</div>
+        <h3 class="svc-title">Real-Time Analytics & Reporting</h3>
+        <p class="svc-desc">Live dashboards, predictive insights, and automated executive reports. Know exactly what's happening in your business before your competitors know theirs.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">05</div>
+        <div class="svc-tag">Ecosystem Integration</div>
+        <h3 class="svc-title">System Integration & API Orchestration</h3>
+        <p class="svc-desc">Connect every tool, every platform, every data source. SABER AI becomes the central nervous system of your business infrastructure — unified and unstoppable.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">06</div>
+        <div class="svc-tag">Custom Build</div>
+        <h3 class="svc-title">Bespoke AI Agent Development</h3>
+        <p class="svc-desc">No off-the-shelf solution fits your vision exactly. We build custom AI agents, models, and decision systems designed from the ground up for your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="howitworks">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">From consultation to full automation in 72 hours.</h2>
+    <p class="section-sub">No lengthy discovery phases. No endless onboarding. SABER AI deploys with surgical precision and begins delivering ROI immediately.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Audit</h4>
+        <p>We dissect your current operations and identify every process that can be automated, eliminated, or accelerated.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Architect</h4>
+        <p>Our engineers design a bespoke automation blueprint tailored to your industry, scale, and growth ambitions.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Deploy</h4>
+        <p>SABER AI is integrated into your systems within 72 hours. Zero downtime. Zero disruption. Full power from day one.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Dominate</h4>
+        <p>Monitor results in real time, scale your automations as you grow, and leave your competitors questioning what happened.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results">
+    <div class="section-tag">Proven Results</div>
+    <h2 class="section-title">Numbers that speak louder than any promise.</h2>
+    <p class="section-sub">Every client that deploys SABER AI sees transformational results within the first 30 days. Here is what the data shows.</p>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-num">98%</div>
+        <h4>Error Elimination</h4>
+        <p>Manual error rate across automated processes drops to near zero from day one.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-num">10x</div>
+        <h4>Faster Execution</h4>
+        <p>Tasks that took hours are completed in seconds. Operational velocity multiplies immediately.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-num">67%</div>
+        <h4>Cost Reduction</h4>
+        <p>Average reduction in operational overhead within the first 6 months of deployment.</p>
+      </div>
+      <div class="result-card">
+        <div class="result-num">£2.4M</div>
+        <h4>Annual Savings</h4>
+        <p>Average annualised savings across our enterprise client base. ROI positive within weeks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-tag">Client Testimonials</div>
+    <h2 class="section-title">Hear it from the businesses we transformed.</h2>
+    <p class="section-sub">Results speak. But so do our clients.</p>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">SABER AI didn't just automate our operations — it fundamentally changed what we believed was possible. In 60 days we cut our back-office headcount by 40% and reinvested that capital into growth.</p>
+        <div class="testi-author">
+          <span class="testi-name">James Whitmore</span>
+          <span class="testi-role">CEO, Meridian Corp</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">I was sceptical that any AI system could handle the complexity of our sales pipeline. SABER AI proved me wrong in the first week. Our conversion rate is up 38% and our team works on deals only they can close.</p>
+        <div class="testi-author">
+          <span class="testi-name">Rachel Obi</span>
+          <span class="testi-role">VP of Sales, Vantage Group</span>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The deployment was seamless. The results were immediate. There is nothing else on the market at this level — SABER AI is in a category of its own. It's not a tool. It's a competitive weapon.</p>
+        <div class="testi-author">
+          <span class="testi-name">David Cheng</span>
+          <span class="testi-role">COO, Orion Systems</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Transparent pricing. Extraordinary returns.</h2>
+    <p class="section-sub">Every tier delivers immediate ROI. Choose the level of automation that matches your ambition.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">Foundation</div>
+        <div class="price-label">Starting from</div>
+        <div class="price-num"><sub>£</sub>2,500<sub>/mo</sub></div>
+        <div class="price-desc">For growing businesses ready to automate their first workflows.</div>
+        <ul class="feat-list">
+          <li class="feat-item">Up to 5 automated workflows</li>
+          <li class="feat-item">AI customer service agent</li>
+          <li class="feat-item">CRM integration</li>
+          <li class="feat-item">Monthly performance report</li>
+          <li class="feat-item">Email support</li>
+        </ul>
+        <a href="#contact" class="btn-colorful btn-block"><span class="btn-label">Get Started</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="plan-name">Elite</div>
+        <div class="price-label">Starting from</div>
+        <div class="price-num"><sub>£</sub>7,500<sub>/mo</sub></div>
+        <div class="price-desc">For scaling companies that demand full-stack AI automation.</div>
+        <ul class="feat-list">
+          <li class="feat-item">Unlimited automated workflows</li>
+          <li class="feat-item">Custom AI agents</li>
+          <li class="feat-item">Full system integration</li>
+          <li class="feat-item">Real-time analytics dashboard</li>
+          <li class="feat-item">Dedicated account engineer</li>
+          <li class="feat-item">Priority support 24/7</li>
+        </ul>
+        <a href="#contact" class="btn-colorful btn-block"><span class="btn-label">Get Started</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+      </div>
+      <div class="pricing-card">
+        <div class="plan-name">Sovereign</div>
+        <div class="price-label">Custom Pricing</div>
+        <div class="price-num">Bespoke</div>
+        <div class="price-desc">For enterprises requiring total AI transformation at every level.</div>
+        <ul class="feat-list">
+          <li class="feat-item">Everything in Elite</li>
+          <li class="feat-item">Custom AI model development</li>
+          <li class="feat-item">On-site deployment support</li>
+          <li class="feat-item">Executive strategy advisory</li>
+          <li class="feat-item">SLA-backed guarantee</li>
+          <li class="feat-item">White-label available</li>
+        </ul>
+        <a href="#contact" class="btn-colorful btn-block"><span class="btn-label">Book a Call</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title">Every answer. No ambiguity.</h2>
+    <p class="section-sub">We operate with complete transparency. If your question isn't here, ask us directly.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>How quickly will we see results?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Most clients see measurable ROI within the first 14 days. Full transformation results are typically visible within 30–60 days depending on the complexity of your operations.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Do I need technical expertise to work with SABER AI?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">None whatsoever. We handle 100% of the technical implementation. Your role is to communicate your business goals — we translate them into automation.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>What industries do you work with?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Finance, legal, e-commerce, logistics, healthcare administration, SaaS, real estate, and professional services. If your business has repetitive processes, SABER AI can automate them.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Is my data secure?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Enterprise-grade security is non-negotiable. All data is processed under ISO 27001 and GDPR-compliant frameworks, with end-to-end encryption and zero data retention policies.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>Can SABER AI integrate with our existing tools?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Yes. SABER AI integrates with over 400 platforms including Salesforce, HubSpot, SAP, Slack, Notion, Shopify, Xero, and custom APIs. If it has an API, we can connect it.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>What happens if something goes wrong?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Our systems operate with 99.97% uptime. In the rare event of an issue, our engineering team responds within minutes. Elite and Sovereign clients have 24/7 dedicated support.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section id="cta-banner">
+    <h2>The Future of Your Business<br>Starts in 72 Hours.</h2>
+    <p>Stop managing. Start dominating. SABER AI is ready to deploy the moment you are. Let's build something that makes your competitors irrelevant.</p>
+    <a href="#contact" class="btn-colorful btn-xl"><span class="btn-label">Book Your Free Strategy Call</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-tag">Contact</div>
+    <div class="contact-layout">
+      <div class="contact-left">
+        <h2 class="section-title">Ready to eliminate the ordinary?</h2>
+        <p>Tell us about your business. We'll show you exactly what SABER AI can automate, how fast, and what it's worth to you in hard numbers.</p>
+        <div class="contact-detail">
+          <div class="contact-item">
+            <div class="contact-icon">✉</div>
+            <span>contact@saberai.io</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <span>+44 20 7946 0000</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🏢</div>
+            <span>One Canada Square, Canary Wharf, London</span>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="James" required />
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Whitmore" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Business Email</label>
+          <input type="email" placeholder="james@company.com" required />
+        </div>
+        <div class="form-field">
+          <label>Company Name</label>
+          <input type="text" placeholder="Meridian Corp" required />
+        </div>
+        <div class="form-field">
+          <label>Annual Revenue</label>
+          <select>
+            <option value="">Select range</option>
+            <option>Under £500k</option>
+            <option>£500k – £2M</option>
+            <option>£2M – £10M</option>
+            <option>£10M – £50M</option>
+            <option>£50M+</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>What do you want to automate?</label>
+          <textarea placeholder="Describe your biggest operational pain points..."></textarea>
+        </div>
+        <button type="submit" class="btn-colorful btn-block form-submit"><span class="btn-label">Send Message — Get a Response in 24h</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">
+          <img src="saberai-logo.png" alt="SABER AI Logo" />
+          SABER<span>AI</span>
+        </div>
+        <p class="footer-about">The world's most advanced AI automation firm for elite businesses. We don't just automate your operations — we redefine what your business is capable of.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Process Automation</a></li>
+          <li><a href="#services">AI Sales Engine</a></li>
+          <li><a href="#services">Customer Service AI</a></li>
+          <li><a href="#services">Analytics & Reporting</a></li>
+          <li><a href="#services">System Integration</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Case Studies</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">GDPR</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 SABER AI Ltd. All rights reserved. Registered in England & Wales.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Form submit handler
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.querySelector('.btn-label').textContent = "Message Sent — We'll be in touch within 24h";
+      btn.querySelector('.btn-arrow').style.display = 'none';
+      btn.style.pointerEvents = 'none';
+      btn.style.opacity = '0.8';
+      btn.disabled = true;
+    }
+
+    // Nav background on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        nav.style.borderBottomWidth = '2px';
+      }
+    });
+  </script>
+
+</body>
+</html>
