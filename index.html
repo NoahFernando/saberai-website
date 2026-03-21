@@ -189,7 +189,7 @@
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      background: var(--white);
+      background: var(--black);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -200,12 +200,33 @@
       overflow: hidden;
     }
 
+    /* Blue accent line sits above canvas */
     #hero::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
       background: var(--blue);
+      z-index: 2;
+    }
+
+    /* Canvas fills the hero behind all content */
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Wrapper lifts all hero content above canvas */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     .hero-eyebrow {
@@ -222,7 +243,7 @@
 
     .hero-title {
       font-size: clamp(3rem, 7vw, 6.5rem);
-      color: var(--black);
+      color: var(--white);
       max-width: 1100px;
       margin-bottom: 28px;
     }
@@ -233,7 +254,7 @@
 
     .hero-sub {
       font-size: 1.15rem;
-      color: var(--dark-gray);
+      color: rgba(255,255,255,0.7);
       max-width: 640px;
       margin-bottom: 52px;
       font-weight: 300;
@@ -253,7 +274,7 @@
       margin-top: 80px;
       display: flex;
       gap: 0;
-      border-top: 1px solid var(--light-gray);
+      border-top: 1px solid rgba(255,255,255,0.15);
       padding-top: 48px;
       width: 100%;
       max-width: 800px;
@@ -268,7 +289,7 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 2.6rem;
       font-weight: 700;
-      color: var(--black);
+      color: var(--white);
       letter-spacing: -0.03em;
     }
 
@@ -276,7 +297,7 @@
 
     .stat-label {
       font-size: 0.75rem;
-      color: var(--mid-gray);
+      color: rgba(255,255,255,0.5);
       letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-top: 4px;
@@ -1084,37 +1105,45 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-eyebrow">AI Automation — Enterprise Grade</div>
-    <h1 class="hero-title">
-      Your Business.<br>
-      <span class="accent">Automated.</span><br>
-      Perfected.
-    </h1>
-    <p class="hero-sub">
-      SABER AI doesn't patch your problems — it obliterates them. We replace entire departments, eliminate human error, and execute at machine precision. This is not software. This is dominance.
-    </p>
-    <div class="hero-cta-group">
-      <a href="#contact" class="btn-colorful btn-lg"><span class="btn-label">Deploy SABER AI</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
-      <a href="#services" class="btn-colorful btn-lg"><span class="btn-label">Explore Capabilities</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+
+    <!-- WavyBackground canvas — sits behind all content at z-index 0 -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- All hero content lives above the canvas -->
+    <div class="hero-content">
+      <div class="hero-eyebrow">AI Automation — Enterprise Grade</div>
+      <h1 class="hero-title">
+        Your Business.<br>
+        <span class="accent">Automated.</span><br>
+        Perfected.
+      </h1>
+      <p class="hero-sub">
+        SABER AI doesn't patch your problems — it obliterates them. We replace entire departments, eliminate human error, and execute at machine precision. This is not software. This is dominance.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#contact" class="btn-colorful btn-lg"><span class="btn-label">Deploy SABER AI</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+        <a href="#services" class="btn-colorful btn-lg"><span class="btn-label">Explore Capabilities</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">98<span>%</span></div>
+          <div class="stat-label">Error Reduction</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10<span>x</span></div>
+          <div class="stat-label">Operational Speed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">£2.4<span>M</span></div>
+          <div class="stat-label">Avg. Annual Savings</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">72<span>h</span></div>
+          <div class="stat-label">Full Deployment</div>
+        </div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">98<span>%</span></div>
-        <div class="stat-label">Error Reduction</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">10<span>x</span></div>
-        <div class="stat-label">Operational Speed</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">£2.4<span>M</span></div>
-        <div class="stat-label">Avg. Annual Savings</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">72<span>h</span></div>
-        <div class="stat-label">Full Deployment</div>
-      </div>
-    </div>
+
   </section>
 
   <!-- LOGOS BAR -->
@@ -1566,6 +1595,85 @@
     window.addEventListener('scroll', () => {
       if (window.scrollY > 40) {
         nav.style.borderBottomWidth = '2px';
+      }
+    });
+  </script>
+
+  <!--
+    WavyBackground — vanilla JS translation of the React component.
+    Uses simplex-noise@4 via CDN ES module (matches createNoise3D dependency).
+    Colors: brand palette (#000000 → #1d4ed8 → #2563eb → #3b82f6 → #dbeafe)
+    Speed: "fast" (0.002), blur: 10px, waveOpacity: 0.5, backgroundFill: #000000
+  -->
+  <script type="module">
+    import { createNoise3D } from 'https://cdn.jsdelivr.net/npm/simplex-noise@4.0.1/dist/esm/simplex-noise.js';
+
+    const noise      = createNoise3D();
+    const canvas     = document.getElementById('hero-canvas');
+    const ctx        = canvas.getContext('2d');
+    const hero       = document.getElementById('hero');
+
+    // — Props (matching component defaults, colours from brand palette) —
+    const waveColors     = ['#1d4ed8', '#2563eb', '#3b82f6', '#dbeafe', '#000000'];
+    const waveWidth      = 50;
+    const blur           = 10;
+    const speed          = 0.002;   // "fast"
+    const waveOpacity    = 0.5;
+    const backgroundFill = '#000000';
+    const NUM_WAVES      = 5;
+
+    // Safari detection (matches original isSafari logic)
+    const isSafari = navigator.userAgent.includes('Safari') &&
+                     !navigator.userAgent.includes('Chrome');
+
+    let w, h, nt = 0, animId;
+
+    function resize() {
+      w = canvas.width  = hero.offsetWidth;
+      h = canvas.height = hero.offsetHeight;
+      // Apply blur via ctx.filter (non-Safari) or canvas style (Safari)
+      if (!isSafari) {
+        ctx.filter = `blur(${blur}px)`;
+      } else {
+        canvas.style.filter = `blur(${blur}px)`;
+      }
+    }
+
+    function drawWave(n) {
+      nt += speed;
+      for (let i = 0; i < n; i++) {
+        ctx.beginPath();
+        ctx.lineWidth   = waveWidth;
+        ctx.strokeStyle = waveColors[i % waveColors.length];
+        for (let x = 0; x < w; x += 5) {
+          // Exact formula from original component
+          const y = noise(x / 800, 0.3 * i, nt) * 100;
+          ctx.lineTo(x, y + h * 0.5);
+        }
+        ctx.stroke();
+        ctx.closePath();
+      }
+    }
+
+    function render() {
+      ctx.fillStyle  = backgroundFill;
+      ctx.globalAlpha = waveOpacity;
+      ctx.fillRect(0, 0, w, h);
+      drawWave(NUM_WAVES);
+      animId = requestAnimationFrame(render);
+    }
+
+    // Init — mirrors the useEffect(() => { init(); return () => cancelAnimationFrame }) pattern
+    resize();
+    window.addEventListener('resize', resize);
+    render();
+
+    // Clean up if page is hidden (tab switch) to save GPU
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animId);
+      } else {
+        render();
       }
     });
   </script>
