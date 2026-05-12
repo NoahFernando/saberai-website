@@ -84,7 +84,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(0,0,0,0.85);
+      background: #000000;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(59,130,246,0.25);
@@ -97,7 +97,7 @@
     }
 
     nav.scrolled {
-      background: rgba(0,0,0,0.96);
+      background: #000000;
       border-bottom-color: rgba(59,130,246,0.45);
       height: 86px;
     }
@@ -247,7 +247,7 @@
       gap: 8px;
       padding: 0 28px;
       height: 44px;
-      background: #18181b;
+      background: #112c58;
       color: #ffffff;
       font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
@@ -266,7 +266,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, #000000, #1d4ed8, #2563eb, #3b82f6, #dbeafe);
+      background: linear-gradient(to right, #0a1628, #1a4db5, #2b6be6, #2057cc);
       opacity: 0.35;
       filter: blur(12px);
       transition: opacity 0.5s;
@@ -318,7 +318,9 @@
       width: 100%;
       height: 100%;
       z-index: 0;
-      will-change: transform;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(to right, black 0%, black 18%, transparent 35%, transparent 65%, black 82%, black 100%);
+      mask-image: linear-gradient(to right, black 0%, black 18%, transparent 35%, transparent 65%, black 82%, black 100%);
     }
 
     #hero::after {
@@ -336,7 +338,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
       width: 100%;
+      margin: 0 auto;
     }
 
     .hero-eyebrow {
@@ -346,11 +350,11 @@
       background: rgba(29,78,216,0.06);
       border: 1px solid rgba(29,78,216,0.2);
       color: var(--blue);
-      font-size: 0.68rem;
+      font-size: 1rem;
       font-weight: 700;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      padding: 8px 20px;
+      padding: 12px 28px;
       margin-bottom: 32px;
       backdrop-filter: blur(8px);
     }
@@ -370,11 +374,13 @@
     }
 
     .hero-title {
-      font-size: clamp(3rem, 7.5vw, 7rem);
+      font-size: clamp(1.94rem, 4.45vw, 4.05rem);
       color: var(--black);
       max-width: 1100px;
       margin-bottom: 28px;
       letter-spacing: -0.03em;
+      text-align: center;
+      width: 100%;
     }
 
     .hero-title .accent {
@@ -385,8 +391,8 @@
     }
 
     .hero-sub {
-      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-      color: rgba(0,0,0,0.52);
+      font-size: clamp(1.097rem, 1.73vw, 1.328rem);
+      color: #111111;
       max-width: 580px;
       margin-bottom: 48px;
       font-weight: 300;
@@ -400,8 +406,49 @@
       justify-content: center;
     }
 
+    .hero-ticker-wrap {
+      width: 100%;
+      max-width: 880px;
+      overflow: hidden;
+      margin-top: 56px;
+      margin-bottom: 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding: 12px 0;
+      background: rgba(29,78,216,0.03);
+    }
+    .hero-ticker {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: ticker-scroll 30s linear infinite;
+    }
+    .hero-ticker:hover { animation-play-state: paused; }
+    .hero-ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 36px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
+      white-space: nowrap;
+    }
+    .hero-ticker-item::after {
+      content: '●';
+      font-size: 0.4rem;
+      color: rgba(0,0,0,0.35);
+      margin-left: 36px;
+    }
+    @keyframes ticker-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .hero-stats {
-      margin-top: 80px;
+      margin-top: 0;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
@@ -486,7 +533,7 @@
 
     .section-sub {
       font-size: 1rem;
-      color: var(--mid-gray);
+      color: #505060;
       max-width: 560px;
       line-height: 1.85;
       margin-bottom: 64px;
@@ -546,23 +593,24 @@
     .logo-item:hover { opacity: 0.7; }
 
     /* PROBLEM */
-    #problem { background: var(--navy); color: var(--white); }
-    #problem .section-title { color: var(--white); }
-    #problem .section-sub   { color: rgba(255,255,255,0.42); }
-    #problem .section-tag   { color: var(--teal-light); }
-    #problem .section-tag::before { background: var(--teal-light); }
+    #problem { background: var(--white); color: var(--black); }
+    #problem .section-title { color: var(--black); }
+    #problem .section-sub   { color: #505060; }
+    #problem .section-tag   { color: var(--blue-light); }
+    #problem .section-tag::before { background: var(--blue-light); }
 
     .problem-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(0,0,0,0.1);
     }
 
     .problem-item {
       padding: 48px 40px;
-      border-right: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      background: var(--white);
       transition: background 0.35s var(--transition);
       position: relative;
       overflow: hidden;
@@ -572,7 +620,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(8,145,178,0.10) 0%, transparent 60%);
+      background: linear-gradient(135deg, rgba(8,145,178,0.06) 0%, transparent 60%);
       opacity: 0;
       transition: opacity 0.35s;
     }
@@ -593,11 +641,11 @@
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--black);
       margin-bottom: 12px;
     }
 
-    .problem-item p { font-size: 0.87rem; color: rgba(255,255,255,0.4); line-height: 1.75; }
+    .problem-item p { font-size: 0.87rem; color: #505060; line-height: 1.75; }
 
     /* SERVICES */
     #services { background: var(--white); }
@@ -643,8 +691,8 @@
     .svc-icon {
       width: 44px;
       height: 44px;
-      background: rgba(29,78,216,0.08);
-      border: 1px solid rgba(29,78,216,0.18);
+      background: #dde6f5;
+      border: 1px solid #b8cceb;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -663,12 +711,12 @@
     /* Ghost number background */
     .svc-ghost {
       position: absolute;
-      bottom: -12px;
+      bottom: 6px;
       right: 20px;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 7rem;
+      font-size: 3.8rem;
       font-weight: 900;
-      color: rgba(0,0,0,0.04);
+      color: rgba(0,0,0,0.82);
       line-height: 1;
       letter-spacing: -0.04em;
       pointer-events: none;
@@ -676,7 +724,7 @@
       user-select: none;
     }
 
-    .service-card:hover .svc-ghost { color: rgba(255,255,255,0.04); }
+    .service-card:hover .svc-ghost { color: rgba(255,255,255,0.18); }
 
     .svc-num {
       font-family: 'Space Grotesk', sans-serif;
@@ -748,7 +796,7 @@
       line-height: 1;
       margin-bottom: 20px;
       letter-spacing: -0.04em;
-      opacity: 0.22;
+      opacity: 1;
       transition: opacity 0.3s;
     }
 
@@ -763,12 +811,12 @@
       margin-bottom: 12px;
     }
 
-    .step p { font-size: 0.87rem; color: var(--mid-gray); line-height: 1.75; }
+    .step p { font-size: 0.87rem; color: #555566; line-height: 1.75; }
 
     /* RESULTS */
     #results { background: var(--navy-mid); color: var(--white); }
     #results .section-title { color: var(--white); }
-    #results .section-sub   { color: rgba(255,255,255,0.42); }
+    #results .section-sub   { color: rgba(255,255,255,0.68); }
     #results .section-tag   { color: var(--teal-light); }
     #results .section-tag::before { background: var(--teal-light); }
 
@@ -824,7 +872,7 @@
       margin-bottom: 12px;
     }
 
-    .result-card p { font-size: 0.85rem; color: rgba(255,255,255,0.36); line-height: 1.7; }
+    .result-card p { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.7; }
 
     /* TESTIMONIALS */
     #testimonials { background: var(--white); }
@@ -984,7 +1032,7 @@
       margin-bottom: 6px;
     }
 
-    .price-num sub { font-size: 1rem; font-weight: 400; vertical-align: baseline; }
+    .price-num sub { font-size: 1rem; font-weight: 400; vertical-align: baseline; margin-right: 3px; }
     .price-desc { font-size: 0.8rem; color: var(--mid-gray); margin-bottom: 36px; line-height: 1.6; }
 
     .feat-list {
@@ -1057,7 +1105,7 @@
       overflow: hidden;
       padding: 0 36px;
       font-size: 0.9rem;
-      color: var(--mid-gray);
+      color: var(--black);
       line-height: 1.85;
       border-top: 0px solid var(--light-gray);
       transition: max-height 0.42s var(--transition), padding 0.3s var(--transition), border-top-width 0.1s;
@@ -1133,7 +1181,7 @@
     .contact-icon {
       width: 40px;
       height: 40px;
-      background: var(--teal);
+      background: var(--navy);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1142,7 +1190,7 @@
       transition: background 0.2s;
     }
 
-    .contact-item:hover .contact-icon { background: var(--teal-light); }
+    .contact-item:hover .contact-icon { background: var(--blue); }
     .contact-item span { font-size: 0.88rem; color: var(--dark-gray); }
 
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
@@ -1234,14 +1282,14 @@
     .footer-brand img { height: 34px; width: 34px; object-fit: contain; }
     .footer-brand span { color: var(--blue-light); }
 
-    .footer-about { font-size: 0.85rem; color: rgba(255,255,255,0.36); line-height: 1.85; }
+    .footer-about { font-size: 0.85rem; color: #ffffff; line-height: 1.85; }
 
     .footer-col h5 {
       font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--blue-light);
       margin-bottom: 20px;
       padding-bottom: 14px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -1251,7 +1299,8 @@
 
     .footer-col a {
       font-size: 0.84rem;
-      color: rgba(255,255,255,0.36);
+      color: #ffffff;
+      text-shadow: none;
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -1266,12 +1315,12 @@
       align-items: center;
     }
 
-    .footer-copy { font-size: 0.76rem; color: rgba(255,255,255,0.26); letter-spacing: 0.04em; }
+    .footer-copy { font-size: 0.76rem; color: rgba(255,255,255,0.8); letter-spacing: 0.04em; }
     .footer-legal { display: flex; gap: 24px; }
 
     .footer-legal a {
       font-size: 0.76rem;
-      color: rgba(255,255,255,0.26);
+      color: rgba(255,255,255,0.8);
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -1429,16 +1478,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,0.38);
+      background: #ffffff;
+      color: var(--navy);
       text-decoration: none;
       transition: border-color 0.2s, color 0.2s, background 0.2s;
       flex-shrink: 0;
     }
 
     .footer-social a:hover {
+      background: var(--blue-light);
+      color: #ffffff;
       border-color: var(--blue-light);
-      color: var(--blue-light);
-      background: rgba(59,130,246,0.08);
     }
 
     /* FORM TRUST SIGNAL */
@@ -1469,7 +1519,7 @@
 
     /* PRINT STYLES */
     @media print {
-      #scroll-progress, #back-to-top, #toast, #cursor-glow,
+      #scroll-progress, #chat-btn, #chat-panel, #toast, #cursor-glow,
       .skip-link, nav, .hero-scroll, #logos, #cta-banner { display: none !important; }
 
       body { color: #000; background: #fff; font-size: 11pt; }
@@ -1600,35 +1650,175 @@
     }
 
     /* BACK TO TOP */
-    #back-to-top {
+    /* CHATBOT */
+    #chat-btn {
       position: fixed;
       bottom: 36px;
       right: 36px;
-      width: 44px;
-      height: 44px;
+      width: 56px;
+      height: 56px;
       background: var(--blue);
       color: var(--white);
       border: none;
+      border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 900;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.35s var(--transition), transform 0.35s var(--transition), background 0.2s;
-      pointer-events: none;
+      box-shadow: 0 4px 24px rgba(29,78,216,0.45);
+      transition: background 0.2s, transform 0.2s var(--transition), box-shadow 0.2s;
     }
 
-    #back-to-top.visible {
+    #chat-btn:hover { background: var(--blue-mid); transform: scale(1.08); box-shadow: 0 6px 32px rgba(29,78,216,0.6); }
+
+    #chat-panel {
+      position: fixed;
+      bottom: 108px;
+      right: 36px;
+      width: 340px;
+      height: 480px;
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: 16px;
+      box-shadow: 0 16px 56px rgba(0,0,0,0.18);
+      z-index: 899;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+      pointer-events: none;
+      transition: opacity 0.3s var(--transition), transform 0.3s var(--transition);
+    }
+
+    #chat-panel.open {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
       pointer-events: auto;
     }
 
-    #back-to-top:hover { background: var(--blue-mid); }
+    .chat-header {
+      background: var(--navy);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-    #back-to-top svg { flex-shrink: 0; }
+    .chat-header-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    .chat-header-info { flex: 1; }
+
+    .chat-header-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .chat-header-status { font-size: 0.68rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    .chat-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      transition: color 0.2s;
+    }
+
+    .chat-close:hover { color: var(--white); }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+
+    .chat-messages::-webkit-scrollbar { width: 3px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--light-gray); border-radius: 2px; }
+
+    .chat-msg {
+      display: flex;
+      flex-direction: column;
+      max-width: 82%;
+    }
+
+    .chat-msg.bot { align-self: flex-start; }
+    .chat-msg.user { align-self: flex-end; }
+
+    .chat-bubble {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    .chat-msg.bot .chat-bubble {
+      background: var(--slate-bg);
+      color: var(--black);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-msg.user .chat-bubble {
+      background: var(--blue);
+      color: var(--white);
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--light-gray);
+      background: var(--white);
+    }
+
+    #chat-input {
+      flex: 1;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.84rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #chat-input:focus { border-color: var(--blue); }
+
+    #chat-send {
+      width: 36px;
+      height: 36px;
+      background: var(--blue);
+      border: none;
+      border-radius: 8px;
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    #chat-send:hover { background: var(--blue-mid); }
 
     /* CURSOR GLOW (desktop only) */
     @media (pointer: fine) {
@@ -1671,9 +1861,34 @@
   <div id="scroll-progress"></div>
 
   <!-- BACK TO TOP -->
-  <button id="back-to-top" aria-label="Back to top">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  <!-- CHATBOT -->
+  <button id="chat-btn" aria-label="Open AI Assistant">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   </button>
+
+  <div id="chat-panel" role="dialog" aria-label="SABER AI Assistant">
+    <div class="chat-header">
+      <div class="chat-header-dot"></div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">SABER AI Assistant</div>
+        <div class="chat-header-status">Online — typically replies instantly</div>
+      </div>
+      <button class="chat-close" aria-label="Close chat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-msg bot">
+        <div class="chat-bubble">Hi there 👋 I'm the SABER AI assistant. Ask me anything about our services, pricing, or how we can automate your business.</div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" />
+      <button id="chat-send" aria-label="Send">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
 
   <!-- TOAST -->
   <div id="toast" role="status" aria-live="polite">
@@ -1683,17 +1898,21 @@
 
   <!-- NAVBAR -->
   <nav id="navbar">
-    <a href="#" class="nav-logo">
-      <div class="nav-logo-icon">
-        <img src="saberai-logo.png" alt="SABER AI Logo" />
-      </div>
-      <span class="nav-logo-text">SABER<span>AI</span></span>
-    </a>
+    <div style="display:flex;align-items:center;gap:32px;">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <img src="no-text.png" alt="SABER AI Logo" />
+        </div>
+        <span class="nav-logo-text">SABER<span>AI</span></span>
+      </a>
+      <a href="tel:+61452107712" style="color:#fff;font-size:1rem;letter-spacing:0.08em;font-weight:500;text-decoration:none;opacity:1;display:flex;align-items:center;gap:8px;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+61 452 107 712</a>
+    </div>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#results">Results</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact Us</a></li>
       <li><a href="#contact" class="btn-colorful btn-sm"><span class="btn-label">Get Started</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a></li>
     </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobile-menu">
@@ -1714,40 +1933,55 @@
   <section id="hero">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
-      <div class="hero-eyebrow reveal">
-        <span class="hero-eyebrow-dot"></span>
-        AI Automation &mdash; Enterprise Grade
-      </div>
       <h1 class="hero-title reveal reveal-delay-1">
-        Your Business.<br>
-        <span class="accent">Automated.</span><br>
-        Perfected.
+        Your competitors are using AI.<br><span style="background:linear-gradient(135deg, var(--blue-mid) 0%, var(--blue-light) 50%, #93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Are you?</span>
       </h1>
       <p class="hero-sub reveal reveal-delay-2">
-        SABER AI doesn&rsquo;t patch your problems &mdash; it obliterates them. We replace entire departments, eliminate human error, and execute at machine precision. This is not software. This is dominance.
+        Many businesses are still using employees to perform tasks that AI can easily do &mdash; wasting between <strong>$80k to $400k every year</strong>. Find out how AI can grow your bottom line.
       </p>
-      <div class="hero-cta-group reveal reveal-delay-3">
-        <a href="#contact" class="btn-colorful btn-lg"><span class="btn-label">Deploy SABER AI</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
-        <a href="#services" class="btn-colorful btn-lg"><span class="btn-label">Explore Capabilities</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+      <a href="#contact" class="reveal reveal-delay-3" style="display:inline-block;margin-top:-12px;font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:400;color:var(--blue);text-decoration:none;">Schedule a meeting</a>
+      <div class="reveal reveal-delay-3" style="margin-top:10px;">
+        <a href="#contact" style="display:inline-flex;align-items:center;justify-content:center;width:68px;height:68px;background:var(--blue);border-radius:16px;text-decoration:none;box-shadow:0 4px 16px rgba(37,99,235,0.3);transition:background 0.2s;" onmouseover="this.style.background='var(--blue-mid)'" onmouseout="this.style.background='var(--blue)'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </a>
+      </div>
+      <div class="hero-ticker-wrap reveal reveal-delay-3">
+        <div class="hero-ticker">
+          <span class="hero-ticker-item">Improve Customer Service</span>
+          <span class="hero-ticker-item">Increase Sales</span>
+          <span class="hero-ticker-item">Reduce Cost</span>
+          <span class="hero-ticker-item">Low Cost Marketing</span>
+          <span class="hero-ticker-item">Payroll Automation</span>
+          <span class="hero-ticker-item">Task / Work Automation</span>
+          <span class="hero-ticker-item">Fewer Staff</span>
+          <span class="hero-ticker-item">Improve Customer Service</span>
+          <span class="hero-ticker-item">Increase Sales</span>
+          <span class="hero-ticker-item">Reduce Cost</span>
+          <span class="hero-ticker-item">Low Cost Marketing</span>
+          <span class="hero-ticker-item">Payroll Automation</span>
+          <span class="hero-ticker-item">Task / Work Automation</span>
+          <span class="hero-ticker-item">Fewer Staff</span>
+        </div>
       </div>
       <div class="hero-stats reveal reveal-delay-4">
         <div class="stat">
-          <div class="stat-num" data-target="98" data-suffix="%">0%</div>
-          <div class="stat-label">Error Reduction</div>
+          <div class="stat-num" data-target="40" data-suffix="%">0%</div>
+          <div class="stat-label">Cost Reduction</div>
         </div>
         <div class="stat">
-          <div class="stat-num" data-target="10" data-suffix="x">0x</div>
-          <div class="stat-label">Operational Speed</div>
+          <div class="stat-num" data-target="387" data-suffix="hrs">0hrs</div>
+          <div class="stat-label">Time Saved pmth</div>
         </div>
         <div class="stat">
-          <div class="stat-num">&pound;2.4<span>M</span></div>
+          <div class="stat-num">$202<span>k</span></div>
           <div class="stat-label">Avg. Annual Savings</div>
         </div>
         <div class="stat">
-          <div class="stat-num" data-target="72" data-suffix="h">0h</div>
+          <div class="stat-num" data-target="72" data-suffix="hrs">0hrs</div>
           <div class="stat-label">Full Deployment</div>
         </div>
       </div>
+      <p style="font-size:0.72rem;color:#999;margin-top:28px;letter-spacing:0.04em;">* Based on a small business with 10 staff</p>
     </div>
 
     <!-- Scroll indicator -->
@@ -1760,64 +1994,40 @@
 
   <div class="section-divider" aria-hidden="true"></div>
 
-  <!-- LOGOS MARQUEE -->
-  <div id="logos">
-    <div class="logos-label">Trusted by industry leaders worldwide</div>
-    <div class="logos-track">
-      <div class="logos-set">
-        <div class="logo-item">Meridian Corp</div>
-        <div class="logo-item">Vantage Group</div>
-        <div class="logo-item">Halcyon Ltd</div>
-        <div class="logo-item">Orion Systems</div>
-        <div class="logo-item">Axiom Capital</div>
-        <div class="logo-item">Stratos Global</div>
-      </div>
-      <div class="logos-set" aria-hidden="true">
-        <div class="logo-item">Meridian Corp</div>
-        <div class="logo-item">Vantage Group</div>
-        <div class="logo-item">Halcyon Ltd</div>
-        <div class="logo-item">Orion Systems</div>
-        <div class="logo-item">Axiom Capital</div>
-        <div class="logo-item">Stratos Global</div>
-      </div>
-    </div>
-  </div>
 
   <!-- PROBLEM -->
-  <section id="problem">
-    <div class="section-tag reveal">The Problem</div>
-    <h2 class="section-title reveal reveal-delay-1">Your business is bleeding money &mdash; every single day.</h2>
-    <p class="section-sub reveal reveal-delay-2">Manual processes, slow teams, and human error aren&rsquo;t just inefficiencies &mdash; they&rsquo;re silent killers of growth. We fix all of it.</p>
-    <div class="problem-grid">
-      <div class="problem-item reveal">
-        <span class="problem-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
-        <h4>Human Error</h4>
-        <p>Every manual task carries risk. Mistakes in data entry, reporting, and communication cost businesses an average of &pound;878,000 per year.</p>
+  <section id="problem" style="max-width:1200px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:117px;height:117px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="saberai-logo.png" alt="SABER AI Logo" style="width:100%;height:100%;object-fit:contain;transform:scale(1.55);" />
+          </div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:2.8rem;font-weight:700;letter-spacing:0.14em;color:#000;text-transform:uppercase;">SABER<span style="color:var(--blue-light);">AI</span></span>
+        </div>
+        <h2 class="section-title reveal reveal-delay-1" style="text-align:left;font-size:clamp(1.7rem,3.4vw,2.72rem);">Once you see AI in action there&rsquo;s no going back.</h2>
+        <p class="section-sub reveal reveal-delay-2" style="text-align:left;max-width:100%;">Manual processes, slow teams, and human error aren&rsquo;t just inefficiencies &mdash; they&rsquo;re silent killers of growth. We fix all of it.</p>
+        <button style="margin-top:-8px;padding:18px 48px;background:var(--gold);border:none;color:#fff;font-size:1rem;font-weight:700;letter-spacing:0.12em;border-radius:6px;cursor:default;text-transform:uppercase;">Click to Experience AI</button>
       </div>
-      <div class="problem-item reveal reveal-delay-1">
-        <span class="problem-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-        <h4>Wasted Time</h4>
-        <p>Your team spends 60% of their day on repetitive, low-value tasks that add no competitive advantage. That stops now.</p>
-      </div>
-      <div class="problem-item reveal reveal-delay-2">
-        <span class="problem-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg></span>
-        <h4>Slow Decisions</h4>
-        <p>By the time data reaches decision-makers, it&rsquo;s outdated. Real-time AI intelligence means your business moves at the speed of now.</p>
-      </div>
-      <div class="problem-item reveal">
-        <span class="problem-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-        <h4>Bloated Headcount</h4>
-        <p>Entire departments exist to do what AI does in milliseconds. We automate the function &mdash; not the people you actually need.</p>
-      </div>
-      <div class="problem-item reveal reveal-delay-1">
-        <span class="problem-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/><line x1="2" y1="2" x2="22" y2="22"/></svg></span>
-        <h4>Disconnected Systems</h4>
-        <p>Siloed tools that don&rsquo;t talk to each other create chaos. SABER AI unifies your tech stack into a single intelligent organism.</p>
-      </div>
-      <div class="problem-item reveal reveal-delay-2">
-        <span class="problem-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-        <h4>Falling Behind</h4>
-        <p>Your competitors are already automating. Every week you wait is a week they extend their lead. The window is closing.</p>
+      <div class="reveal reveal-delay-2" style="background:#fff;border:1px solid rgba(29,78,216,0.15);border-radius:12px;padding:40px;box-shadow:0 8px 40px rgba(29,78,216,0.08);">
+        <h3 style="font-size:1.15rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue);margin-bottom:24px;">Talk To An AI Specialist</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <input type="text" placeholder="Name" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;" />
+          <input type="email" placeholder="Email Address" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;" />
+          <input type="tel" placeholder="Phone Number (Optional)" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;" />
+          <input type="text" placeholder="Business Name" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;" />
+          <select style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#555;outline:none;box-sizing:border-box;font-family:inherit;background:#fff;appearance:none;">
+            <option value="" disabled selected>— Select a Service —</option>
+            <option>Business Process Automation</option>
+            <option>AI Sales &amp; Lead Generation</option>
+            <option>Intelligent Customer Service</option>
+            <option>Real-Time Analytics &amp; Reporting</option>
+            <option>System Integration &amp; API Orchestration</option>
+            <option>Bespoke AI Agent Development</option>
+          </select>
+          <textarea placeholder="Tell us about your business..." rows="3" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;resize:none;"></textarea>
+          <button type="submit" style="width:100%;padding:16px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:0.85rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;">Request a Free Consultation</button>
+        </div>
       </div>
     </div>
   </section>
@@ -1834,6 +2044,7 @@
         <div class="svc-tag">Intelligence Core</div>
         <h3 class="svc-title">Business Process Automation</h3>
         <p class="svc-desc">Map, optimise, and fully automate your end-to-end business processes. From finance workflows to HR onboarding &mdash; SABER AI takes over and never makes mistakes.</p>
+        <button style="margin-top:16px;padding:8px 20px;background:transparent;border:1.5px solid var(--blue-light);color:var(--blue-light);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;border-radius:4px;cursor:default;text-transform:uppercase;">AI Example</button>
         <span class="svc-ghost">01</span>
       </div>
       <div class="service-card reveal reveal-delay-1">
@@ -1842,6 +2053,7 @@
         <div class="svc-tag">Revenue Engine</div>
         <h3 class="svc-title">AI Sales &amp; Lead Generation</h3>
         <p class="svc-desc">Autonomous lead qualification, outreach personalisation, and pipeline management. Your sales machine never sleeps, never misses a follow-up, never forgets a lead.</p>
+        <button style="margin-top:16px;padding:8px 20px;background:transparent;border:1.5px solid var(--blue-light);color:var(--blue-light);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;border-radius:4px;cursor:default;text-transform:uppercase;">AI Example</button>
         <span class="svc-ghost">02</span>
       </div>
       <div class="service-card reveal reveal-delay-2">
@@ -1850,6 +2062,7 @@
         <div class="svc-tag">Customer Operations</div>
         <h3 class="svc-title">Intelligent Customer Service</h3>
         <p class="svc-desc">Deploy AI agents that resolve 90% of enquiries without human involvement &mdash; instantly, at scale, across every channel, 24 hours a day.</p>
+        <button style="margin-top:16px;padding:8px 20px;background:transparent;border:1.5px solid var(--blue-light);color:var(--blue-light);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;border-radius:4px;cursor:default;text-transform:uppercase;">AI Example</button>
         <span class="svc-ghost">03</span>
       </div>
       <div class="service-card reveal reveal-delay-3">
@@ -1858,6 +2071,7 @@
         <div class="svc-tag">Data Command</div>
         <h3 class="svc-title">Real-Time Analytics &amp; Reporting</h3>
         <p class="svc-desc">Live dashboards, predictive insights, and automated executive reports. Know exactly what&rsquo;s happening in your business before your competitors know theirs.</p>
+        <button style="margin-top:16px;padding:8px 20px;background:transparent;border:1.5px solid var(--blue-light);color:var(--blue-light);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;border-radius:4px;cursor:default;text-transform:uppercase;">AI Example</button>
         <span class="svc-ghost">04</span>
       </div>
       <div class="service-card reveal reveal-delay-2">
@@ -1866,6 +2080,7 @@
         <div class="svc-tag">Ecosystem Integration</div>
         <h3 class="svc-title">System Integration &amp; API Orchestration</h3>
         <p class="svc-desc">Connect every tool, every platform, every data source. SABER AI becomes the central nervous system of your business infrastructure &mdash; unified and unstoppable.</p>
+        <button style="margin-top:16px;padding:8px 20px;background:transparent;border:1.5px solid var(--blue-light);color:var(--blue-light);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;border-radius:4px;cursor:default;text-transform:uppercase;">AI Example</button>
         <span class="svc-ghost">05</span>
       </div>
       <div class="service-card reveal reveal-delay-3">
@@ -1874,6 +2089,7 @@
         <div class="svc-tag">Custom Build</div>
         <h3 class="svc-title">Bespoke AI Agent Development</h3>
         <p class="svc-desc">No off-the-shelf solution fits your vision exactly. We build custom AI agents, models, and decision systems designed from the ground up for your business.</p>
+        <button style="margin-top:16px;padding:8px 20px;background:transparent;border:1.5px solid var(--blue-light);color:var(--blue-light);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;border-radius:4px;cursor:default;text-transform:uppercase;">AI Example</button>
         <span class="svc-ghost">06</span>
       </div>
     </div>
@@ -1883,57 +2099,63 @@
   <section id="howitworks">
     <div class="section-tag reveal">How It Works</div>
     <h2 class="section-title reveal reveal-delay-1">From consultation to full automation in 72 hours.</h2>
-    <p class="section-sub reveal reveal-delay-2">No lengthy discovery phases. No endless onboarding. SABER AI deploys with surgical precision and begins delivering ROI immediately.</p>
+    <p class="section-sub reveal reveal-delay-2">No lengthy discovery phases. No endless onboarding. Many of our deployments can be achieved in 72 hours or even less in many cases.</p>
     <div class="steps">
       <div class="step reveal">
         <div class="step-num">01</div>
-        <h4>Audit</h4>
+        <h4>Consultation</h4>
         <p>We dissect your current operations and identify every process that can be automated, eliminated, or accelerated.</p>
       </div>
       <div class="step reveal reveal-delay-1">
         <div class="step-num">02</div>
         <h4>Architect</h4>
-        <p>Our engineers design a bespoke automation blueprint tailored to your industry, scale, and growth ambitions.</p>
+        <p>Our engineers design a bespoke automation blueprint tailored to your business, industry, scale, and growth ambitions.</p>
       </div>
       <div class="step reveal reveal-delay-2">
         <div class="step-num">03</div>
-        <h4>Deploy</h4>
-        <p>SABER AI is integrated into your systems within 72 hours. Zero downtime. Zero disruption. Full power from day one.</p>
+        <h4>Test</h4>
+        <p>SABER AI works through a diligent testing process prior to final go live.</p>
       </div>
       <div class="step reveal reveal-delay-3">
         <div class="step-num">04</div>
-        <h4>Dominate</h4>
+        <h4>Deploy</h4>
         <p>Monitor results in real time, scale your automations as you grow, and leave your competitors questioning what happened.</p>
       </div>
     </div>
   </section>
 
-  <!-- RESULTS -->
+  <!-- RESULTS / AI AUDIT PROMO -->
   <section id="results">
-    <div class="section-tag reveal">Proven Results</div>
-    <h2 class="section-title reveal reveal-delay-1">Numbers that speak louder than any promise.</h2>
-    <p class="section-sub reveal reveal-delay-2">Every client that deploys SABER AI sees transformational results within the first 30 days. Here is what the data shows.</p>
+    <div class="section-tag reveal">Complimentary Offer</div>
+    <h2 class="section-title reveal reveal-delay-1">Your complimentary AI audit</h2>
+    <p class="section-sub reveal reveal-delay-2">Most businesses are unknowingly wasting thousands every month on tasks AI can handle instantly. Our free AI Audit pinpoints exactly where, while uncovering your biggest opportunities to win more customers, close more sales, and deliver better service.</p>
     <div class="results-grid">
       <div class="result-card reveal">
-        <div class="result-num" data-target="98" data-suffix="%">98%</div>
-        <h4>Error Elimination</h4>
-        <p>Manual error rate across automated processes drops to near zero from day one.</p>
+        <div class="result-num">$0</div>
+        <h4>Cost to You</h4>
+        <p>A fully personalised AI Audit delivered at zero cost. We invest the time so you can see the opportunity.</p>
       </div>
       <div class="result-card reveal reveal-delay-1">
-        <div class="result-num" data-target="10" data-suffix="x">10x</div>
-        <h4>Faster Execution</h4>
-        <p>Tasks that took hours are completed in seconds. Operational velocity multiplies immediately.</p>
+        <div class="result-num">3<span style="font-size:1.8rem;">hrs</span></div>
+        <h4>All It Takes</h4>
+        <p>One focused 3-hour session with our specialists. We do the heavy lifting &mdash; you get the answers.</p>
       </div>
       <div class="result-card reveal reveal-delay-2">
-        <div class="result-num" data-target="67" data-suffix="%">67%</div>
-        <h4>Cost Reduction</h4>
-        <p>Average reduction in operational overhead within the first 6 months of deployment.</p>
+        <div class="result-num">100%</div>
+        <h4>Yours to Keep</h4>
+        <p>Your automation roadmap is yours regardless of what you decide.</p>
       </div>
       <div class="result-card reveal reveal-delay-3">
-        <div class="result-num">&pound;2.4M</div>
-        <h4>Annual Savings</h4>
-        <p>Average annualised savings across our enterprise client base. ROI positive within weeks.</p>
+        <div class="result-num">24<span style="font-size:1.8rem;">hr</span></div>
+        <h4>Report Delivered</h4>
+        <p>Within 24 hours you receive a clear, actionable report showing exactly what can be automated in your business.</p>
       </div>
+    </div>
+    <div class="reveal reveal-delay-4" style="text-align:center;margin-top:52px;">
+      <a href="#contact" style="display:inline-flex;align-items:center;gap:12px;background:var(--gold);color:#fff;font-size:1rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:20px 56px;border-radius:6px;">
+        Claim My Free AI Audit
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
     </div>
   </section>
 
@@ -1983,7 +2205,7 @@
   </section>
 
   <!-- PRICING -->
-  <section id="pricing">
+  <section id="pricing" style="display:none;">
     <div class="section-tag reveal">Pricing</div>
     <h2 class="section-title reveal reveal-delay-1">Transparent pricing. Extraordinary returns.</h2>
     <p class="section-sub reveal reveal-delay-2">Every tier delivers immediate ROI. Choose the level of automation that matches your ambition.</p>
@@ -1991,7 +2213,7 @@
       <div class="pricing-card reveal">
         <div class="plan-name">Foundation</div>
         <div class="price-label">Starting from</div>
-        <div class="price-num"><sub>&pound;</sub>2,500<sub>/mo</sub></div>
+        <div class="price-num"><sub>$</sub>2,500<sub>/mo</sub></div>
         <div class="price-desc">For growing businesses ready to automate their first workflows.</div>
         <ul class="feat-list">
           <li class="feat-item">Up to 5 automated workflows</li>
@@ -2006,7 +2228,7 @@
         <div class="featured-badge">Most Popular</div>
         <div class="plan-name">Elite</div>
         <div class="price-label">Starting from</div>
-        <div class="price-num"><sub>&pound;</sub>7,500<sub>/mo</sub></div>
+        <div class="price-num"><sub>$</sub>7,500<sub>/mo</sub></div>
         <div class="price-desc">For scaling companies that demand full-stack AI automation.</div>
         <ul class="feat-list">
           <li class="feat-item">Unlimited automated workflows</li>
@@ -2039,7 +2261,7 @@
   <!-- FAQ -->
   <section id="faq">
     <div class="section-tag reveal">FAQ</div>
-    <h2 class="section-title reveal reveal-delay-1">Every answer. No ambiguity.</h2>
+    <h2 class="section-title reveal reveal-delay-1">Frequent Questions.</h2>
     <p class="section-sub reveal reveal-delay-2">We operate with complete transparency. If your question isn&rsquo;t here, ask us directly.</p>
     <div class="faq-list reveal">
       <div class="faq-item">
@@ -2090,7 +2312,7 @@
   <!-- CTA BANNER -->
   <section id="cta-banner">
     <h2 class="reveal">The Future of Your Business<br>Starts in 72 Hours.</h2>
-    <p class="reveal reveal-delay-1">Stop managing. Start dominating. SABER AI is ready to deploy the moment you are. Let&rsquo;s build something that makes your competitors irrelevant.</p>
+    <p class="reveal reveal-delay-1">Stop managing. Start dominating. SABER AI is ready to deploy the moment you are. Let&rsquo;s build something that leaves your competitors in the dust.</p>
     <div class="reveal reveal-delay-2">
       <a href="#contact" class="btn-colorful btn-xl"><span class="btn-label">Book Your Free Strategy Call</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
     </div>
@@ -2105,60 +2327,35 @@
         <p>Tell us about your business. We&rsquo;ll show you exactly what SABER AI can automate, how fast, and what it&rsquo;s worth to you in hard numbers.</p>
         <div class="contact-detail">
           <div class="contact-item">
-            <div class="contact-icon">&#9993;</div>
+            <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
             <span>contact@saberai.io</span>
           </div>
           <div class="contact-item">
-            <div class="contact-icon">&#128222;</div>
+            <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
             <span>+44 20 7946 0000</span>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">&#127962;</div>
-            <span>One Canada Square, Canary Wharf, London</span>
           </div>
         </div>
       </div>
-      <form class="contact-form reveal reveal-delay-1" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-field">
-            <label for="f-first">First Name</label>
-            <input id="f-first" type="text" placeholder="James" autocomplete="given-name" required />
-          </div>
-          <div class="form-field">
-            <label for="f-last">Last Name</label>
-            <input id="f-last" type="text" placeholder="Whitmore" autocomplete="family-name" required />
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="f-email">Business Email</label>
-          <input id="f-email" type="email" placeholder="james@company.com" autocomplete="email" required />
-        </div>
-        <div class="form-field">
-          <label for="f-company">Company Name</label>
-          <input id="f-company" type="text" placeholder="Meridian Corp" autocomplete="organization" required />
-        </div>
-        <div class="form-field">
-          <label for="f-revenue">Annual Revenue</label>
-          <select id="f-revenue" name="revenue">
-            <option value="">Select range</option>
-            <option>Under &pound;500k</option>
-            <option>&pound;500k &ndash; &pound;2M</option>
-            <option>&pound;2M &ndash; &pound;10M</option>
-            <option>&pound;10M &ndash; &pound;50M</option>
-            <option>&pound;50M+</option>
+      <div class="reveal reveal-delay-1" style="background:#fff;border:1px solid rgba(29,78,216,0.15);border-radius:12px;padding:40px;box-shadow:0 8px 40px rgba(29,78,216,0.08);">
+        <h3 style="font-size:1.15rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue);margin-bottom:24px;">Talk To An AI Specialist</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <input type="text" placeholder="Name" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;" />
+          <input type="email" placeholder="Email Address" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;" />
+          <input type="tel" placeholder="Phone Number (Optional)" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;" />
+          <input type="text" placeholder="Business Name" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;" />
+          <select style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#555;outline:none;box-sizing:border-box;font-family:inherit;background:#fff;appearance:none;">
+            <option value="" disabled selected>— Select a Service —</option>
+            <option>Business Process Automation</option>
+            <option>AI Sales &amp; Lead Generation</option>
+            <option>Intelligent Customer Service</option>
+            <option>Real-Time Analytics &amp; Reporting</option>
+            <option>System Integration &amp; API Orchestration</option>
+            <option>Bespoke AI Agent Development</option>
           </select>
+          <textarea placeholder="Tell us about your business..." rows="3" style="width:100%;padding:14px 16px;border:1.5px solid rgba(29,78,216,0.2);border-radius:6px;font-size:0.95rem;color:#111;outline:none;box-sizing:border-box;font-family:inherit;resize:none;"></textarea>
+          <button type="submit" style="width:100%;padding:16px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:0.85rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;">Request a Free Consultation</button>
         </div>
-        <div class="form-field">
-          <label for="f-message">What do you want to automate?</label>
-          <textarea id="f-message" name="message" placeholder="Describe your biggest operational pain points..."></textarea>
-        </div>
-        <button type="submit" class="btn-colorful btn-block form-submit"><span class="btn-label">Send Message &mdash; Get a Response in 24h</span><span class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></button>
-        <div class="form-trust">
-          <span>No credit card required</span>
-          <span>Free 30-min strategy call</span>
-          <span>Response within 24h</span>
-        </div>
-      </form>
+      </div>
     </div>
   </section>
 
@@ -2167,7 +2364,7 @@
     <div class="footer-inner">
       <div>
         <div class="footer-brand">
-          <img src="saberai-logo.png" alt="SABER AI Logo" loading="lazy" decoding="async" />
+          <img src="no-text.png" alt="SABER AI Logo" loading="lazy" decoding="async" />
           SABER<span>AI</span>
         </div>
         <p class="footer-about">The world&rsquo;s most advanced AI automation firm for elite businesses. We don&rsquo;t just automate your operations &mdash; we redefine what your business is capable of.</p>
@@ -2227,7 +2424,7 @@
     /* SCROLL — single consolidated handler */
     const progressBar = document.getElementById('scroll-progress');
     const navbar = document.getElementById('navbar');
-    const backToTop = document.getElementById('back-to-top');
+    const backToTop = null; // replaced by chatbot
 
     const heroScroll = document.querySelector('.hero-scroll');
 
@@ -2236,7 +2433,6 @@
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       progressBar.style.width = (scrollY / maxScroll * 100) + '%';
       navbar.classList.toggle('scrolled', scrollY > 40);
-      backToTop.classList.toggle('visible', scrollY > 500);
       if (heroScroll) heroScroll.classList.toggle('hidden', scrollY > 80);
     }, { passive: true });
 
@@ -2370,8 +2566,59 @@
       showToast();
     }
 
-    /* BACK TO TOP */
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    /* CHATBOT */
+    const chatBtn = document.getElementById('chat-btn');
+    const chatPanel = document.getElementById('chat-panel');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+    const chatClose = chatPanel.querySelector('.chat-close');
+
+    const botResponses = [
+      { keywords: ['price','pricing','cost','how much','plan','tier'],
+        reply: 'Our plans start from $2,500/mo (Foundation), $7,500/mo (Elite), and custom pricing for Sovereign. Each delivers immediate ROI. Want me to walk you through what\'s included?' },
+      { keywords: ['service','automate','automation','workflow','process'],
+        reply: 'SABER AI offers 6 core services: Business Process Automation, AI Sales & Lead Generation, Intelligent Customer Service, Real-Time Analytics, System Integration, and Bespoke AI Agent Development. Which interests you most?' },
+      { keywords: ['deploy','how long','time','fast','quick','72'],
+        reply: 'We deploy in 72 hours. No lengthy onboarding, no discovery phases — just surgical precision from day one.' },
+      { keywords: ['contact','call','speak','talk','demo','book','meet'],
+        reply: 'You can book a free strategy call or fill in the contact form at the bottom of this page. We\'ll show you exactly what SABER AI can automate and what it\'s worth in hard numbers.' },
+      { keywords: ['secure','security','data','gdpr','privacy'],
+        reply: 'Enterprise-grade security is non-negotiable. All data is processed under ISO 27001 and GDPR-compliant frameworks, with end-to-end encryption and zero data retention policies.' },
+      { keywords: ['result','roi','return','saving','saving'],
+        reply: 'Clients typically see 98% reduction in manual error, 60% faster operations, and an average of $2.4M in annual savings within the first 6 months.' },
+      { keywords: ['hello','hi','hey','morning','afternoon'],
+        reply: 'Hello! Great to have you here. How can SABER AI help your business today?' },
+    ];
+
+    function addMessage(text, type) {
+      const msg = document.createElement('div');
+      msg.className = `chat-msg ${type}`;
+      msg.innerHTML = `<div class="chat-bubble">${text}</div>`;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getBotReply(input) {
+      const lower = input.toLowerCase();
+      for (const r of botResponses) {
+        if (r.keywords.some(k => lower.includes(k))) return r.reply;
+      }
+      return "Great question. For a detailed answer, I'd recommend speaking directly with our team — use the contact form below to book a free strategy call and we'll get back to you within 24 hours.";
+    }
+
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      chatInput.value = '';
+      setTimeout(() => addMessage(getBotReply(text), 'bot'), 600);
+    }
+
+    chatBtn.addEventListener('click', () => chatPanel.classList.toggle('open'));
+    chatClose.addEventListener('click', () => chatPanel.classList.remove('open'));
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
 
     /* SCROLL SPY — active nav link */
     const spySections = ['services','results','pricing','faq','contact'];
@@ -2405,68 +2652,168 @@
     }
   </script>
 
-  <!-- WAVY BACKGROUND -->
-  <script type="module">
-    try {
-      const { createNoise3D } = await import('https://cdn.jsdelivr.net/npm/simplex-noise@4.0.1/dist/esm/simplex-noise.js');
 
-      const noise  = createNoise3D();
+  <!-- NEURAL NETWORK BACKGROUND -->
+  <script>
+    (function() {
       const canvas = document.getElementById('hero-canvas');
-      const ctx    = canvas.getContext('2d');
-      const hero   = document.getElementById('hero');
+      if (!canvas) return;
+      const ctx  = canvas.getContext('2d');
+      const hero = document.getElementById('hero');
 
-      const waveColors     = ['#3b82f6','#2563eb','#93c5fd','#bfdbfe','#dbeafe'];
-      const waveWidth      = 50;
-      const blur           = 12;
-      const speed          = 0.002;
-      const waveOpacity    = 0.35;
-      const backgroundFill = '#ffffff';
-      const NUM_WAVES      = 5;
+      let w, h, animId;
 
-      const isSafari = navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
-      let w, h, nt = 0, animId;
+      /* --- Network architecture --- */
+      const LAYERS = [4, 6, 6, 5, 3];   /* nodes per layer */
+      let nodes  = [];   /* { x, y, glow } */
+      let edges  = [];   /* { a, b } index pairs */
+      let pulses = [];   /* { edge, t, speed } */
+
+      function buildNetwork() {
+        nodes = [];
+        edges = [];
+        pulses = [];
+
+        const layerCount = LAYERS.length;
+        const marginX    = w * 0.08;
+        const usableW    = w - marginX * 2;
+        const layerX     = i => marginX + (i / (layerCount - 1)) * usableW;
+        const centerY    = h * 0.5;
+        const gap        = h * 0.13;
+
+        let layerStart = [];
+
+        LAYERS.forEach((count, li) => {
+          layerStart.push(nodes.length);
+          const totalH = (count - 1) * gap;
+          for (let ni = 0; ni < count; ni++) {
+            nodes.push({
+              x:    layerX(li),
+              y:    centerY - totalH / 2 + ni * gap,
+              glow: Math.random() * Math.PI * 2,
+            });
+          }
+        });
+
+        /* connect every node in layer i to every node in layer i+1 */
+        for (let li = 0; li < LAYERS.length - 1; li++) {
+          const start  = layerStart[li];
+          const end    = layerStart[li + 1];
+          const countA = LAYERS[li];
+          const countB = LAYERS[li + 1];
+          for (let a = start; a < start + countA; a++) {
+            for (let b = end; b < end + countB; b++) {
+              edges.push({ a, b });
+            }
+          }
+        }
+
+        /* seed initial pulses — just one */
+        spawnPulse();
+      }
+
+      function spawnPulse() {
+        pulses.push({
+          edge:  Math.floor(Math.random() * edges.length),
+          t:     0,
+          speed: 0.004 + Math.random() * 0.003,
+        });
+      }
 
       function resize() {
         w = canvas.width  = hero.offsetWidth;
         h = canvas.height = hero.offsetHeight;
-        if (!isSafari) ctx.filter = `blur(${blur}px)`;
-        else canvas.style.filter = `blur(${blur}px)`;
+        buildNetwork();
       }
 
-      function drawWave(n) {
-        nt += speed;
-        for (let i = 0; i < n; i++) {
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        /* draw edges */
+        edges.forEach(({ a, b }) => {
           ctx.beginPath();
-          ctx.lineWidth   = waveWidth;
-          ctx.strokeStyle = waveColors[i % waveColors.length];
-          for (let x = 0; x < w; x += 5) {
-            const y = noise(x / 800, 0.3 * i, nt) * 100;
-            ctx.lineTo(x, y + h * 0.5);
-          }
+          ctx.moveTo(nodes[a].x, nodes[a].y);
+          ctx.lineTo(nodes[b].x, nodes[b].y);
+          ctx.strokeStyle = 'rgba(37,99,235,0.1)';
+          ctx.lineWidth   = 1;
           ctx.stroke();
-          ctx.closePath();
-        }
-      }
+        });
 
-      function render() {
-        ctx.fillStyle   = backgroundFill;
-        ctx.globalAlpha = waveOpacity;
-        ctx.fillRect(0, 0, w, h);
-        drawWave(NUM_WAVES);
-        animId = requestAnimationFrame(render);
+        /* update & draw pulses — keep only 3 active */
+        pulses = pulses.filter(p => p.t < 1);
+        while (pulses.length < 3) spawnPulse();
+        pulses.forEach(p => {
+          p.t += p.speed;
+          const { a, b } = edges[p.edge];
+          const x = nodes[a].x + (nodes[b].x - nodes[a].x) * p.t;
+          const y = nodes[a].y + (nodes[b].y - nodes[a].y) * p.t;
+
+          /* trail */
+          const trailLen = 0.12;
+          const t0 = Math.max(0, p.t - trailLen);
+          const tx = nodes[a].x + (nodes[b].x - nodes[a].x) * t0;
+          const ty = nodes[a].y + (nodes[b].y - nodes[a].y) * t0;
+          const grad = ctx.createLinearGradient(tx, ty, x, y);
+          grad.addColorStop(0, 'rgba(59,130,246,0)');
+          grad.addColorStop(1, 'rgba(59,130,246,0.7)');
+          ctx.beginPath();
+          ctx.moveTo(tx, ty);
+          ctx.lineTo(x, y);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth   = 1.5;
+          ctx.stroke();
+
+          /* pulse head */
+          ctx.beginPath();
+          ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(99,160,255,0.9)';
+          ctx.fill();
+
+          /* boost glow on destination node when pulse arrives */
+          if (p.t > 0.92) nodes[b].glow = Math.PI / 2;
+        });
+
+        /* draw nodes */
+        nodes.forEach(n => {
+          n.glow += 0.04;
+          const brightness = 0.4 + 0.35 * Math.sin(n.glow);
+          const r = 4;
+
+          /* outer glow */
+          const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 5);
+          g.addColorStop(0, `rgba(37,99,235,${brightness * 0.35})`);
+          g.addColorStop(1, 'rgba(37,99,235,0)');
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r * 5, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
+
+          /* core ring */
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(59,130,246,${0.5 + brightness * 0.4})`;
+          ctx.lineWidth   = 1.5;
+          ctx.stroke();
+
+          /* inner fill */
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r - 1, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(37,99,235,${brightness * 0.6})`;
+          ctx.fill();
+        });
+
+        animId = requestAnimationFrame(draw);
       }
 
       resize();
-      window.addEventListener('resize', resize);
-      render();
+      draw();
 
+      window.addEventListener('resize', () => { resize(); });
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) cancelAnimationFrame(animId);
-        else render();
+        else draw();
       });
-    } catch (e) {
-      console.warn('SABER AI: wave animation unavailable (CDN load failed)');
-    }
+    })();
   </script>
 
 </body>
